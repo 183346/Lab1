@@ -25,6 +25,7 @@ public class AlienController {
     private TextField txtWord;
     @FXML
     private TextArea txtResult;
+    // modifica numero 2
     @FXML
     private Button btnTranslate;
     @FXML
