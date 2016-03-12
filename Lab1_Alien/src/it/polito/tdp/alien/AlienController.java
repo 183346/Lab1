@@ -45,9 +45,12 @@ public class AlienController {
     	this.txtInput.clear();
 
     }
+    
 
     @FXML
     void doTranslate(ActionEvent event) {
+    	
+    	WordEnhanced we = new WordEnhanced();
     	this.txtResult.clear();
     	String stringaIntera=this.txtInput.getText();
     	String alienWord="";
@@ -74,6 +77,7 @@ public class AlienController {
     	
     	String controllo=word.compare(alienWord);
     	ad.addWord(alienWord, italianWord);
+    	we.addWord(alienWord, italianWord);
     	
     	
     	this.txtResult.appendText("alien word introdotta:  "+alienWord+"\n"+"italian word tradotta:  "+italianWord);
@@ -84,8 +88,18 @@ public class AlienController {
 
     
     }else{
+    	if(alienWord.indexOf("?")!=-1){
+    		this.txtResult.clear();
+    		
+    		String res4 = ad.translateWord1(alienWord);	
+    		if(res4.compareTo("")==0){this.txtResult.appendText("nessuna traduzione\n");return;}
+    		else{this.txtResult.appendText(res4);return;}
+    	}
     	String res1 = ad.translateWord(alienWord);
-    	this.txtResult.appendText("la traduzione è:   "+ res1);
+    	this.txtResult.appendText("la traduzione è:   "+ res1+"\n");
+    	String res2= we.getLista(alienWord);
+    	this.txtResult.appendText("traduzioni totali: \n");
+    	this.txtResult.appendText(res2);
     }}
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

@@ -34,7 +34,7 @@ public class AlienDictionary {
 			
 	}
 	public boolean controlloInput(String text) {
-		 Pattern p = Pattern.compile("^[a-z,A-Z]+[ ]{1}+[a-z,A-Z]+|[a-z,A-Z]+$");
+		 Pattern p = Pattern.compile("^[a-z,A-Z]+[ ]{1}+[a-z,A-Z]+|[a-z,A-Z,?]+$");
 		// il punto interrogativo indica OPZIONALE
 		 //IL SIMBOLO + CONCATENA
 		 //esempio per numeri reali
@@ -46,5 +46,28 @@ public class AlienDictionary {
 		 boolean b = m.matches();
 		 
 		 return b;
+	}
+
+
+	public String translateWord1(String alienWord) {
+		String result="";
+		String prima="";
+		String seconda="";
+		//attenzione ricordarsi nello split con i caratteri speciali mettere \\ davanti
+		String[] vet = alienWord.split("\\?");
+		prima=vet[0];
+		
+		seconda=vet[1];
+		List<String> listaCerca = new LinkedList<String>(this.words.keySet());
+		for(String s:listaCerca){
+		if(s.indexOf(prima)!=-1 && s.indexOf(seconda)!=-1){
+			
+			result=result+"traduzione:   "+s+"\n";
+			
+		}
+		}
+		
+		
+		return result;
 	}
 }
