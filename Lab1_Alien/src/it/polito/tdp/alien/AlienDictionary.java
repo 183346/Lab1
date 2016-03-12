@@ -34,7 +34,8 @@ public class AlienDictionary {
 			
 	}
 	public boolean controlloInput(String text) {
-		 Pattern p = Pattern.compile("^[a-z,A-Z]+[ ]{1}+[a-z,A-Z]+|[a-z,A-Z,?]+$");
+		 Pattern p = Pattern.compile("^[a-z,A-Z]+[ ]{1}+[a-z,A-Z]+$|[a-z,A-Z]*[?]?[a-z,A-Z]*"
+		 		+ "");
 		// il punto interrogativo indica OPZIONALE
 		 //IL SIMBOLO + CONCATENA
 		 //esempio per numeri reali
@@ -44,7 +45,7 @@ public class AlienDictionary {
 		 
 		 Matcher m = p.matcher(text);
 		 boolean b = m.matches();
-		 
+		// if(text.compareTo("?")==0){b=false;}
 		 return b;
 	}
 
@@ -53,16 +54,30 @@ public class AlienDictionary {
 		String result="";
 		String prima="";
 		String seconda="";
+		WordEnhanced add = new WordEnhanced();
 		//attenzione ricordarsi nello split con i caratteri speciali mettere \\ davanti
+		//attenzione che può non creare la posizione se è null, cioè se ? è ultimo
 		String[] vet = alienWord.split("\\?");
-		prima=vet[0];
+		if(alienWord.compareTo("?")==0){prima="";}else{prima=vet[0];}
+		if(vet.length>1){
+		seconda=vet[1];}
+		List<String> listaCerca = new LinkedList<String>();
+		List<String> listaRisposta = new LinkedList<String>();
 		
-		seconda=vet[1];
-		List<String> listaCerca = new LinkedList<String>(this.words.keySet());
-		for(String s:listaCerca){
-		if(s.indexOf(prima)!=-1 && s.indexOf(seconda)!=-1){
+		List<WordEnhanced> listaCercaAD = add.getListaa();
+		for(WordEnhanced dd: listaCercaAD){
+			listaCerca.add(dd.getAlienWord());
+			listaRisposta.add(dd.getTranslation());
 			
-			result=result+"traduzione:   "+s+"\n";
+		}
+		
+		
+		for(int y=0;y<listaCerca.size();y++){
+		String s=listaCerca.get(y);
+		if(s.indexOf(prima)!=-1 && s.indexOf(seconda)!=-1){
+			if(s.substring(0, prima.length()).compareTo(prima)==0 && s.substring(s.length()-seconda.length(), s.length()).compareTo(seconda)==0){
+			
+			result=result+"parola:  "+listaCerca.get(y)+"   traduzione:   "+listaRisposta.get(y)+"\n";}
 			
 		}
 		}

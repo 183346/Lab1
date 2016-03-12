@@ -82,7 +82,7 @@ public class AlienController {
     	
     	this.txtResult.appendText("alien word introdotta:  "+alienWord+"\n"+"italian word tradotta:  "+italianWord);
     	this.txtResult.appendText(controllo);
-    	System.out.println(ad.words.entrySet().toString());
+    	
     	
     	
 

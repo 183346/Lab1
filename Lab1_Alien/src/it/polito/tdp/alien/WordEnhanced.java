@@ -60,6 +60,12 @@ public class WordEnhanced {
 		}
 		return result;
 	}
+	
+	public List<WordEnhanced> getListaa(){
+		
+		
+		return this.lista1;
+	}
 
 
 	@Override
